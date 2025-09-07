@@ -35,7 +35,8 @@ ifneq ($(DIRTY),)
 VERSION := $(VERSION)+dirty
 endif
 
-IMG ?= $(IMG_NAME):$(VERSION)
+IMG ?= $(IMG_NAME):latest
+IMG_TAGGED ?= $(IMG_NAME):$(VERSION)
 
 .PHONY: all
 all: build
@@ -139,6 +140,10 @@ docker-build: ## Build docker image with the manager.
 
 .PHONY: docker-push
 docker-push: ## Push docker image with the manager.
+	if [ -n "$(TAG)" ]; then \
+		$(CONTAINER_TOOL) tag $(IMG) $(IMG_TAGGED); \
+		$(CONTAINER_TOOL) push $(IMG_TAGGED); \
+	fi
 	$(CONTAINER_TOOL) push ${IMG}
 
 # PLATFORMS defines the target platforms for the manager image be built to provide support to multiple
