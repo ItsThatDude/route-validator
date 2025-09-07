@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: route-validator-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.yaml: |
+    namespaceSelector:
+      {{- toYaml .Values.validator.namespaceSelector | nindent 6 }}
+    matchDomains:
+      {{- toYaml .Values.validator.matchDomains | nindent 6}}
+    subdomainLabel: {{ .Values.validator.subdomainLabel }}

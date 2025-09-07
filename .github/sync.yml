@@ -1,0 +1,4 @@
+itsthatdude/helm-charts:
+  - source: dist/chart/
+    dest: charts/route-validator/
+    deleteOrphaned: true
