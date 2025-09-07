@@ -1,10 +1,22 @@
 # route-validator
-// TODO(user): Add simple overview of use/purpose
+A Kubernetes Admission Webhook Controller that restricts routes and ingresses to using a specific subdomain. 
 
 ## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+Route Validator is a Kubernetes Admission Webhook Controller that restricts routes and ingresses to using a specific subdomain. 
 
-## Getting Started
+To control a namespace, add the required label to the namespace. 
+Optionally, you can add a subdomain label to require a specific subdomain to be used - if this is not set the validator will use the namespace name.
+
+## Installing
+To install this project using helm, add the repo https://itsthatdude.github.io/helm-charts/
+
+```sh
+helm install route-validator itsthatdude/route-validator -f values.yaml
+```
+
+In your values file, make sure to set the `validator.matchDomains` setting to the domains you wish to enforce validation on.
+
+## Development
 
 ### Prerequisites
 - go version v1.24.0+
