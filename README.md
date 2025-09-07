@@ -11,6 +11,7 @@ Optionally, you can add a subdomain label to require a specific subdomain to be 
 To install this project using helm, add the repo https://itsthatdude.github.io/helm-charts/
 
 ```sh
+helm repo add itsthatdude https://itsthatdude.github.io/helm-charts/
 helm install route-validator itsthatdude/route-validator -f values.yaml
 ```
 
