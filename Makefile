@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= itsthatdood/route-validator:latest
+IMG_NAME ?= itsthatdood/route-validator
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -18,6 +18,24 @@ CONTAINER_TOOL ?= docker
 # Options are set to exit when a recipe line exits non-zero or a piped command fails.
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
+
+COMMIT = $(shell git rev-parse HEAD)
+TAG = $(shell git describe --exact-match --abbrev=0 --tags '$(COMMIT)' 2> /dev/null || true)
+DIRTY = $(shell git diff --shortstat 2> /dev/null | tail -n1)
+
+# Use a tag if set, otherwise use the commit hash
+ifeq ($(TAG),)
+VERSION := $(COMMIT)
+else
+VERSION := $(TAG)
+endif
+
+# Check for changed files
+ifneq ($(DIRTY),)
+VERSION := $(VERSION)+dirty
+endif
+
+IMG ?= $(IMG_NAME):$(VERSION)
 
 .PHONY: all
 all: build
