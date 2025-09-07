@@ -2,6 +2,11 @@ name: E2E Tests
 
 on:
   push:
+    paths:
+      - cmd/**
+      - internal/**
+      - go.mod
+      - go.sum
   pull_request:
 
 jobs:
