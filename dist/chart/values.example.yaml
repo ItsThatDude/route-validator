@@ -8,11 +8,9 @@ validator:
 
   # -- This specifies the namespace selector the admission controller applies to
   namespaceSelector:
-    matchLabels:
-      enforce-route-check: "true"
-  #  matchExpressions: []
-  #   - key: tenant
-  #     operator: Exists
+    matchExpressions:
+     - key: antware.xyz/tenant
+       operator: Exists
 
   # -- This specifies which label on the namespace to use as the required subdomain.<br />
   # If a blank string is provided, the validator will use the namespace as the required subdomain.

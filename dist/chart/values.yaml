@@ -10,7 +10,7 @@ validator:
   namespaceSelector:
     matchLabels:
       enforce-route-check: "true"
-  #  matchExpressions: []
+  #  matchExpressions:
   #   - key: tenant
   #     operator: Exists
 
