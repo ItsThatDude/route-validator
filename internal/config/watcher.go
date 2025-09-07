@@ -18,9 +18,14 @@ func WatchConfigFile(configFilePath string, cm *ConfigManager) {
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Error(err, "failed to create fsnotify watcher", "error", err)
+		log.Error(err, "failed to create fsnotify watcher")
 	}
-	defer watcher.Close()
+
+	defer func() {
+		if err := watcher.Close(); err != nil {
+			log.Error(err, "failed to close watcher")
+		}
+	}()
 
 	if err := watcher.Add(dir); err != nil {
 		log.Error(err, "failed to watch directory %s", "directory", dir)

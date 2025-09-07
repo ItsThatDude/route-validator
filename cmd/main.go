@@ -87,7 +87,8 @@ func main() {
 	flag.StringVar(&metricsCertKey, "metrics-cert-key", "tls.key", "The name of the metrics server key file.")
 	flag.BoolVar(&enableHTTP2, "enable-http2", false,
 		"If set, HTTP/2 will be enabled for the metrics and webhook servers")
-	flag.StringVar(&configPath, "config-path", "/etc/route-validator/config.yaml", "The path to the validator configuration file.")
+	flag.StringVar(&configPath, "config-path", "/etc/route-validator/config.yaml",
+		"The path to the validator configuration file.")
 	opts := zap.Options{
 		Development: true,
 	}
